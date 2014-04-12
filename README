@@ -1,0 +1,33 @@
+#
+# SHALLA LIST UPDATE SCRIPT FOR DANSGUARDIAN
+#
+# (C)Copyright 2009, 2010 Remigio Conti (shallalist@shareskills.org)
+#
+# Current Version: 20101117.0340
+#
+# Report issue and comment to: shallalist@shareskills.org
+#
+
+The script can be executed by user dansguardian via crontab. It download shalla list and update local categories via diff and patch. 
+All categories must be present locally otherwise an error is reported (if you don't use all of it, you can omit reference in dansguardian configuration files). The error is reported because if new categories is added or old removed, it is appropriate to handle this manually.
+
+The script handle correctly the #listcategory: entry at the beginning of each category (domain/url) file and append the list modify date / time 
+to the category name, so you can use this on a custom html deny page for dansguardian to inform the user on which shalla list they have to do.
+
+For the script to handle #listcategory entry correctly, you must enter this entry (first line) manually for the first time in each domains/urls file for each category in the LISTBASE folder (in the updshalla.conf provided with the script this folder is: /etc/dansguardian/lists/blacklists/shalla). This because the listcategory name  can be localized with the language of your country).
+
+So for example for the jobsearch category you can insert this entry at the beginning of the domains/urls files:
+
+#listcategory: "Jobsearch (List: shallalist.de)"
+
+
+Each action is logged on: console, system logger, logfile /var/log/updshalla.log.
+
+During install you must create /var/log/updshalla.log manually with ownership dansguardian:dansguardian
+
+Error and report is mailed via mailsend binary that must be present on the system (http://www.muquit.com/muquit/software/mailsend/mailsend.html)
+
+Edit updshalla.conf with your parameters.
+
+Enjoy!  
+ 
